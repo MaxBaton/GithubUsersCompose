@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":feature-all-users:domain"))
 
     implementation(libs.lifecycle.runtime.ktx)
 
