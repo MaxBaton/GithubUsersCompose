@@ -17,3 +17,5 @@ rootProject.name = "GithubUsersCompose"
 include(":app")
 include(":core:ui")
 include(":feature-all-users:presentation")
+include(":feature-all-users:domain")
+include(":feature-all-users:data")
