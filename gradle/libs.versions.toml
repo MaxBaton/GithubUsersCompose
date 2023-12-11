@@ -35,6 +35,9 @@ kotlinx-coroutines-test = "1.7.3"
 androidx-test-ext-junit = "1.1.5"
 
 navigation-runtime-ktx="2.7.5"
+espresso-core = "3.5.1"
+appcompat = "1.6.1"
+material = "1.10.0"
 
 [libraries]
 
@@ -71,7 +74,11 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation-compose" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }

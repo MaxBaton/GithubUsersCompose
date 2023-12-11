@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "GithubUsersCompose"
 include(":app")
- 
+include(":core:ui")
+include(":feature-all-users:presentation")
