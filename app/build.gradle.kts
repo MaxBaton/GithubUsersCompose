@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":feature-all-users:presentation"))
 
     implementation(libs.core.ktx)
 

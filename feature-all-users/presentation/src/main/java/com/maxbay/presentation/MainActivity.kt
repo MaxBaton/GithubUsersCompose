@@ -1,4 +1,4 @@
-package com.maxbay.githubuserscompose
+package com.maxbay.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.maxbay.githubuserscompose.ui.theme.GithubUsersComposeTheme
+import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
