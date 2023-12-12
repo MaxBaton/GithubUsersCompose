@@ -1,9 +1,11 @@
 package com.maxbay.presentation.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.maxbay.domain.usecase.ObserveUsersUseCase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
 class UserViewModel(
@@ -15,7 +17,11 @@ class UserViewModel(
     }
 
     private fun observeUsers() {
-        viewModelScope.launch {
+        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+            Log.d("Errors", throwable.message.toString())
+        }
+
+        viewModelScope.launch(context = exceptionHandler) {
             observeUsersUseCase.execute().collect { users ->
                 val a = users
                 val s = users.size
