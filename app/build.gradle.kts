@@ -57,6 +57,9 @@ android {
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":feature-all-users:presentation"))
+    implementation(project(":feature-all-users:domain"))
+    implementation(project(":feature-all-users:data"))
+    implementation(project(":core:di"))
 
     implementation(libs.core.ktx)
 

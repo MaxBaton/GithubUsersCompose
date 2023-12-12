@@ -46,10 +46,10 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     // Retrofit
-    implementation(libs.com.squareup.retrofit2.retrofit)
-    implementation(libs.com.squareup.retrofit2.converter.gson)
+    api(libs.com.squareup.retrofit2.retrofit)
+    api(libs.com.squareup.retrofit2.converter.gson)
 
     // OkHttp
-    implementation(libs.com.squareup.okhttp3.okhttp)
-    implementation(libs.com.squareup.okhttp3.logging.interceptor)
+    api(libs.com.squareup.okhttp3.okhttp)
+    api(libs.com.squareup.okhttp3.logging.interceptor)
 }

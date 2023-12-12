@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -60,6 +59,8 @@ dependencies {
     api(libs.kotlinx.coroutines.android)
     api(libs.lifecycle.viewmodel.ktx)
     api(libs.coil.compose)
+    api(libs.lifecycle.runtime.compose)
+    api(libs.lifecycle.viewmodel.compose)
 
     androidTestApi(platform(libs.compose.bom))
     androidTestApi(libs.ui.test.junit4)

@@ -10,8 +10,6 @@ java {
 }
 
 dependencies {
-    api(project(":core:contract:usecase"))
-
     // tests
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
