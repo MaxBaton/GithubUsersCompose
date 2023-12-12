@@ -14,3 +14,7 @@
 .cxx
 local.properties
 /.idea*
+/core/contract/usecase/build/kotlin/compileKotlin/local-state/build-history.bin
+/core/di/build/kotlin/compileKotlin/local-state/build-history.bin
+/core/contract/usecase/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
+/core/di/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
