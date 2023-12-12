@@ -13,7 +13,7 @@ import com.maxbay.domain.repository.UserRepository
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import retrofit2.Retrofit
 
-class GithubUsersComposeApplication: Application() {
+class App: Application() {
     override fun onCreate() {
         super.onCreate()
         DiProvider.di = initDi()
