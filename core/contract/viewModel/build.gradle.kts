@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.maxbay.presentation"
+    namespace = "com.maxbay.core.ui"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -40,12 +40,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:ui"))
-    implementation(project(":core:di"))
-    implementation(project(":feature-all-users:domain"))
-    api(project(":core:contract:viewModel"))
-
-    implementation(libs.lifecycle.runtime.ktx)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
@@ -54,9 +48,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // tests
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+    api(libs.lifecycle.runtime.compose)
+    api(libs.lifecycle.viewmodel.compose)
 }
