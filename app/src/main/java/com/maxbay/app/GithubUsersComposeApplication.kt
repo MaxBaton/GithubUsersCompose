@@ -5,7 +5,9 @@ import com.gefest.di.DiProvider
 import com.gefest.di.GlobalDi
 import com.maxbay.app.di.GlobalDiImpl
 import com.maxbay.data.network.api.UserApi
+import com.maxbay.data.network.api.UserApiHelper
 import com.maxbay.data.network.factory.AppRetrofit
+import com.maxbay.data.network.impl.UserApiHelperImpl
 import com.maxbay.data.repository.UserRepositoryImpl
 import com.maxbay.domain.repository.UserRepository
 import com.maxbay.domain.usecase.ObserveUsersUseCase
@@ -37,9 +39,14 @@ class GithubUsersComposeApplication: Application() {
         )
 
         di.add(
+            key = UserApiHelper::class,
+            object_ = UserApiHelperImpl(userApi = di.get(class_ = UserApi::class))
+        )
+
+        di.add(
             key = UserRepository::class,
             object_ = UserRepositoryImpl(
-                userApi = di.get(class_ = UserApi::class)
+                userApiHelper = di.get(class_ = UserApiHelper::class)
             )
         )
 
