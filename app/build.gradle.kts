@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":feature-all-users:domain"))
     implementation(project(":feature-all-users:data"))
     implementation(project(":core:di"))
+    implementation(project(":core:navigation"))
 
     implementation(libs.core.ktx)
 

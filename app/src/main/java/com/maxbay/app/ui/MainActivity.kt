@@ -1,4 +1,4 @@
-package com.maxbay.presentation
+package com.maxbay.app.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,12 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.maxbay.app.navigation.AppNavHost
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.gefest.di.DiProvider
-import com.maxbay.domain.usecase.ObserveUsersUseCase
-import com.maxbay.presentation.viewModel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.maxbay.presentation
+package com.maxbay.presentation.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle

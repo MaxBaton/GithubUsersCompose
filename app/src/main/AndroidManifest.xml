@@ -16,7 +16,7 @@
         android:theme="@style/Theme.GithubUsersCompose"
         tools:targetApi="31">
         <activity
-            android:name="com.maxbay.presentation.MainActivity"
+            android:name="com.maxbay.app.ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.GithubUsersCompose">
