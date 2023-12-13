@@ -52,4 +52,7 @@ dependencies {
     // OkHttp
     api(libs.com.squareup.okhttp3.okhttp)
     api(libs.com.squareup.okhttp3.logging.interceptor)
+
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
 }
