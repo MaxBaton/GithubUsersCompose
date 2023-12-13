@@ -20,25 +20,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GithubUsersComposeTheme {
-                val viewModel: UserViewModel = viewModel(
-                    factory = UserViewModel.Factory(
-                        observeUsersUseCase = DiProvider.di.get(class_ = ObserveUsersUseCase::class)
-                    )
-                )
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.onPrimary
+                ) {
+                    GithubUsersComposeApp()
+                }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GithubUsersComposeTheme {
-        Greeting("Android")
+    @Composable
+    private fun GithubUsersComposeApp() {
+        GithubUsersComposeTheme {
+            AppNavHost()
+        }
     }
 }

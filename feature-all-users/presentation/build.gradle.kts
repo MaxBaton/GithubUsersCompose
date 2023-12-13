@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":feature-all-users:domain"))
     api(project(":core:contract:viewModel"))
+    api(project(":core:navigation"))
 
     implementation(libs.lifecycle.runtime.ktx)
 
