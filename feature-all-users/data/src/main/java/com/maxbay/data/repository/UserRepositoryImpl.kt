@@ -1,7 +1,8 @@
 package com.maxbay.data.repository
 
 import com.maxbay.data.mappers.toDomain
-import com.maxbay.data.network.api.UserApiHelper
+import com.maxbay.data.mappers.toEntity
+import com.maxbay.data.network.api.UserApi
 import com.maxbay.data.storage.database.api.DatabaseStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.utils.MILLISECOND_IN_MINUTES_COEFF
@@ -12,33 +13,46 @@ import com.maxbay.domain.repository.UserRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 
 class UserRepositoryImpl(
-    private val userApiHelper: UserApiHelper,
+    private val userApi: UserApi,
     private val preferencesStorage: PreferencesStorage,
     private val databaseStorage: DatabaseStorage,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): UserRepository {
-    override fun observeUsers(): Flow<List<User>> {
+    private val usersState = MutableStateFlow<List<User>>(emptyList())
+
+    override suspend fun observeUsers(): Flow<List<User>> {
+        val users = getUsers()
+        usersState.update {
+            users
+        }
+
+        return usersState
+    }
+
+    private suspend fun getUsers(): List<User> {
         val currentTime = System.currentTimeMillis()
-        val lastCacheTime = 0L //preferencesStorage.getLastTimeCache()
+        val lastCacheTime = preferencesStorage.getLastTimeCache()
         val isNeedGettingFromNetwork = isDifferenceMoreThanMinute(
             startTime = lastCacheTime,
             endTime = currentTime
         )
 
-        val users = if (isNeedGettingFromNetwork) {
-             userApiHelper
-                .getAllUsers()
-                .flowOn(context = dispatcher)
-                .map { it.toDomain() }
-        }else {
-            databaseStorage.getAllUsers().map { it.toDomain() }
-        }
+        return if (isNeedGettingFromNetwork) {
+            val usersNetwork = userApi.getAllUsers()
+            val usersEntity = usersNetwork.toEntity()
 
-        return users
+            databaseStorage.addAllUsers(users = usersEntity)
+            preferencesStorage.saveLastTimeCache(time = currentTime)
+
+            usersNetwork.toDomain()
+        }else {
+            databaseStorage.getAllUsers().toDomain()
+        }
     }
 
     private fun isDifferenceMoreThanMinute(startTime: Long, endTime: Long): Boolean {

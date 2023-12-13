@@ -83,7 +83,7 @@ class App: Application() {
         di.add(
             key = UserRepository::class,
             object_ = UserRepositoryImpl(
-                userApiHelper = di.get(class_ = UserApiHelper::class),
+                userApi = di.get(class_ = UserApi::class),
                 preferencesStorage = di.get(class_ = PreferencesStorage::class),
                 databaseStorage = di.get(class_ = DatabaseStorage::class)
             )

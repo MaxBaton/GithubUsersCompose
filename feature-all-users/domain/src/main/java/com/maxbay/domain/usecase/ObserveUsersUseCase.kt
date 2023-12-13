@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class ObserveUsersUseCase(private val repository: UserRepository):
     UseCaseFlowWithoutParams<List<User>>{
-    override fun execute(): Flow<List<User>> {
+    override suspend fun execute(): Flow<List<User>> {
         return repository.observeUsers()
     }
 }
