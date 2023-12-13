@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -66,7 +65,10 @@ fun UsersScreen(
             is UserContract.State.Success -> {
                 Column {
                     TopBar(title = stringResource(id = R.string.title_users),)
-                    UserItems(userItems = uiState.users)
+                    UserItems(
+                        users = uiState.users,
+                        onItemClick = onItemClick
+                    )
                 }
             }
         }
