@@ -32,8 +32,8 @@ fun UsersScreen(
         modifier = modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.onPrimary
     ) {
-        when(uiState) {
-            UserContract.State.Fail -> {
+        when(uiState.loadingState) {
+            UserContract.State.LoadingState.Fail -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -45,19 +45,20 @@ fun UsersScreen(
                     )
                 }
             }
-            is UserContract.State.FailWithException -> {
+
+            is UserContract.State.LoadingState.FailWithException -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = stringResource(id = R.string.fail_loading_with_exception, uiState.message),
+                        text = stringResource(id = R.string.fail_loading_with_exception, uiState.loadingState.message),
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             }
-            UserContract.State.Loading -> {
+            UserContract.State.LoadingState.Loading -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -65,7 +66,7 @@ fun UsersScreen(
                     CircularProgressIndicator()
                 }
             }
-            is UserContract.State.Success -> {
+            is UserContract.State.LoadingState.Success -> {
                 Column {
                     TopBar(title = stringResource(id = R.string.title_users))
                     Spacer8()
@@ -91,11 +92,11 @@ fun UsersScreen(
 @Preview(showBackground = true)
 fun UsersScreenPreview() {
     GithubUsersComposeTheme {
-        UsersScreen(
-            uiState = UserContract.State.Loading,
-            modifier = Modifier.fillMaxSize(),
-            onItemClick = {},
-            onSearch = {}
-        )
+//        UsersScreen(
+//            uiState = UserContract.State.Loading,
+//            modifier = Modifier.fillMaxSize(),
+//            onItemClick = {},
+//            onSearch = {}
+//        )
     }
 }

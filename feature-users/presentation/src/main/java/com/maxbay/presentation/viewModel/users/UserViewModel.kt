@@ -12,13 +12,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-private const val EMPTY = ""
 
 class UserViewModel(
     private val observeUsersUseCase: ObserveUsersUseCase,
     private val searchUsersUceCase: SearchUsersUceCase
 ): ViewModel(), UserContract {
-    private val _uiState = MutableStateFlow<UserContract.State>(UserContract.State.Loading)
+    private val _uiState = MutableStateFlow(UserContract.State.initial())
     override val uiState: StateFlow<UserContract.State> = _uiState.asStateFlow()
 
     private val _effect = MutableStateFlow<UserContract.Effect?>(null)
@@ -47,23 +46,28 @@ class UserViewModel(
 
     private fun observeUsers() {
         val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-            _uiState.update {
-                UserContract.State.FailWithException(message = throwable.message.toString())
+            _uiState.update { currentState ->
+                currentState.copy(loadingState = UserContract.State.LoadingState.FailWithException(message = throwable.message.toString()))
             }
         }
 
         viewModelScope.launch(context = exceptionHandler) {
             observeUsersUseCase.execute().collect { users ->
                 if (users.isNotEmpty()) {
-                    _uiState.update {
-                        UserContract.State.Success(
+                    _uiState.update { currentState ->
+                        currentState.copy(
                             users = users,
-                            search = EMPTY
+                            loadingState = UserContract.State.LoadingState.Success
                         )
                     }
                 }else {
-                    _uiState.update {
-                        UserContract.State.Fail
+                    _uiState.update { currentState ->
+                        val loadingState = currentState.loadingState
+                        if (loadingState is UserContract.State.LoadingState.Loading) {
+                            currentState.copy(loadingState = UserContract.State.LoadingState.Fail)
+                        }else {
+                            currentState.copy(users = users)
+                        }
                     }
                 }
             }
@@ -79,16 +83,8 @@ class UserViewModel(
     private fun onSearch(search: String) {
         viewModelScope.launch {
             searchUsersUceCase.execute(param = search)
-
             _uiState.update { currentState ->
-                if (currentState is UserContract.State.Success) {
-                    UserContract.State.Success(
-                        users = currentState.users,
-                        search = search
-                    )
-                }else {
-                    currentState
-                }
+                currentState.copy(search = search)
             }
         }
     }

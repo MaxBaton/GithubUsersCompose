@@ -3,20 +3,34 @@ package com.maxbay.presentation.viewModel.users
 import com.maxbay.domain.models.User
 import com.maxbay.viewmodel.UnidirectionalViewModel
 
+private const val EMPTY = ""
+
 interface UserContract: UnidirectionalViewModel<
         UserContract.State,
         UserContract.Event,
         UserContract.Effect?
         > {
 
-    sealed interface State {
-        data object Loading: State
-        data object Fail: State
-        data class FailWithException(val message: String): State
-        data class Success(
-            val users: List<User>,
-            val search: String
-        ): State
+    data class State(
+        val users: List<User>,
+        val search: String,
+        val loadingState: LoadingState
+    ) {
+        sealed interface LoadingState {
+            data object Loading: LoadingState
+            data object Fail: LoadingState
+            data class FailWithException(val message: String): LoadingState
+            data object Success: LoadingState
+
+        }
+
+        companion object {
+            fun initial() = State(
+                users = emptyList(),
+                search = EMPTY,
+                loadingState = State.LoadingState.Loading
+            )
+        }
     }
 
     sealed interface Event {
