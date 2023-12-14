@@ -1,6 +1,5 @@
-package com.maxbay.presentation.viewModel
+package com.maxbay.presentation.viewModel.users
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope

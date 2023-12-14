@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 import com.maxbay.core.ui.widgets.topbar.TopBar
 import com.maxbay.presentation.R
-import com.maxbay.presentation.viewModel.UserContract
+import com.maxbay.presentation.viewModel.users.UserContract
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
