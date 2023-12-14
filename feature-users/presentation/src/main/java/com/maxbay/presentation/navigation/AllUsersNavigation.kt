@@ -31,8 +31,8 @@ fun NavGraphBuilder.allUsers(onItemClick: (id: Int) -> Unit) {
 
         UsersScreen(
             uiState = uiState,
-            onItemClick = {
-                viewModel.handleEvent(event = UserContract.Event.UserItemClick(id = id))
+            onItemClick = { userId ->
+                viewModel.handleEvent(event = UserContract.Event.UserItemClick(id = userId))
             }
         )
     }
