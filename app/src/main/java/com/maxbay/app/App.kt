@@ -19,6 +19,7 @@ import com.maxbay.data.storage.database.impl.DatabaseStorageImpl
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
 import com.maxbay.domain.repository.UserRepository
+import com.maxbay.domain.usecase.GetUserByIdUseCase
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import retrofit2.Retrofit
 
@@ -38,6 +39,7 @@ class App: Application() {
 
         initDbFeature(di = di)
         initFeatureAllUsers(di = di)
+        initFeatureUserDetails(di = di)
 
         return di
     }
@@ -92,6 +94,13 @@ class App: Application() {
         di.add(
             key = ObserveUsersUseCase::class,
             object_ = ObserveUsersUseCase(repository = di.get(class_ = UserRepository::class))
+        )
+    }
+
+    private fun initFeatureUserDetails(di: GlobalDi) {
+        di.add(
+            key = GetUserByIdUseCase::class,
+            object_ = GetUserByIdUseCase(repository = di.get(class_ = UserRepository::class))
         )
     }
 }

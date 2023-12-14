@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.maxbay.data.storage.database.dto.UserDto
 import com.maxbay.data.storage.database.entities.UserEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -26,4 +25,18 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllUsers(users: List<UserEntity>)
+
+    @Query(
+        "select " +
+                "${UserEntity.ID} as ${UserDto.ID}, " +
+                "${UserEntity.LOGIN} as ${UserDto.LOGIN}, " +
+                "${UserEntity.AVATAR_URL} as ${UserDto.AVATAR_URL}, " +
+                "${UserEntity.ORGANIZATION_URL} as ${UserDto.ORGANIZATION_URL}, " +
+                "${UserEntity.REPOS_URL} as ${UserDto.REPOS_URL}, " +
+                "${UserEntity.SITE_ADMIN} as ${UserDto.SITE_ADMIN}, " +
+                "${UserEntity.URL} as ${UserDto.URL} " +
+                "from ${UserEntity.TABLE_NAME} " +
+                "where ${UserEntity.ID} = :id"
+    )
+    suspend fun getUserById(id: Int): UserDto
 }

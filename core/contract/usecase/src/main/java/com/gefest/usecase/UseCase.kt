@@ -5,3 +5,7 @@ import kotlinx.coroutines.flow.Flow
 interface UseCaseFlowWithoutParams<RESULT> {
     suspend fun execute(): Flow<RESULT>
 }
+
+interface UseCaseSuspendWithOneParam<PARAM, RESULT> {
+    suspend fun execute(param: PARAM): RESULT
+}

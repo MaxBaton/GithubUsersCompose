@@ -3,7 +3,7 @@ package com.maxbay.data.mappers
 import com.maxbay.data.storage.database.dto.UserDto
 import com.maxbay.domain.models.User
 
-private fun UserDto.toDomain() = User(
+internal fun UserDto.toDomain() = User(
     id = this.id,
     avatarUrl = this.avatarUrl,
     login = this.login,

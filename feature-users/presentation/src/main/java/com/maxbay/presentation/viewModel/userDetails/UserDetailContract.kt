@@ -12,7 +12,6 @@ interface UserDetailContract: UnidirectionalViewModel<
     sealed interface State {
         data object Loading: State
         data object Fail: State
-        data class FailWithException(val message: String): State
         data class Success(val user: User): State
     }
 

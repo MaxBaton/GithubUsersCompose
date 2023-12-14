@@ -34,6 +34,10 @@ class UserRepositoryImpl(
         return usersState
     }
 
+    override suspend fun getUserById(userId: Int): User {
+        return databaseStorage.getUserById(id = userId).toDomain()
+    }
+
     private suspend fun getUsers(): List<User> {
         val currentTime = System.currentTimeMillis()
         val lastCacheTime = preferencesStorage.getLastTimeCache()

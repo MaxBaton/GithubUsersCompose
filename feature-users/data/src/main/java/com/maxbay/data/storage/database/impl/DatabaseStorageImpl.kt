@@ -15,4 +15,7 @@ class DatabaseStorageImpl(private val dao: UserDao): DatabaseStorage {
         dao.addAllUsers(users = users)
     }
 
+    override suspend fun getUserById(id: Int): UserDto {
+        return dao.getUserById(id = id)
+    }
 }

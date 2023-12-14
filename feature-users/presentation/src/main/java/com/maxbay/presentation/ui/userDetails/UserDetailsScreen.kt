@@ -16,7 +16,6 @@ fun UserDetailsScreen(
 ) {
     when(uiState) {
         UserDetailContract.State.Fail -> {}
-        is UserDetailContract.State.FailWithException -> {}
         UserDetailContract.State.Loading -> {}
         is UserDetailContract.State.Success -> {
             UserDetailsItem(user = uiState.user)
