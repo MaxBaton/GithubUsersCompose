@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.maxbay.presentation.navigation.USERS_ROUTE
+import com.maxbay.presentation.navigation.navigateToUserDetails
 import com.maxbay.presentation.navigation.users
 
 @Composable
@@ -14,7 +15,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         startDestination = USERS_ROUTE
     ) {
         users(
-            onItemClick = {},
+            onItemClick = navController::navigateToUserDetails,
             onUpClick = navController::popBackStack
         )
     }
