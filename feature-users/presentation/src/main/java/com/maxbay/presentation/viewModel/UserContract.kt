@@ -17,10 +17,10 @@ interface UserContract: UnidirectionalViewModel<
     }
 
     sealed interface Event {
-
+        data class UserItemClick(val id: Int): Event
     }
 
     sealed interface Effect {
-
+        data class UserItemClick(val id: Int): Effect
     }
 }

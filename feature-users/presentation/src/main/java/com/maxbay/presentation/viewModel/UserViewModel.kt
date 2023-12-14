@@ -26,11 +26,17 @@ class UserViewModel(
     }
 
     override fun handleEvent(event: UserContract.Event) {
-        TODO()
+        when(event) {
+            is UserContract.Event.UserItemClick -> {
+                onUserItemClick(id = event.id)
+            }
+        }
     }
 
     override fun consume() {
-        TODO("Not yet implemented")
+        _effect.update {
+            null
+        }
     }
 
     private fun observeUsers() {
@@ -52,6 +58,12 @@ class UserViewModel(
                     }
                 }
             }
+        }
+    }
+
+    private fun onUserItemClick(id: Int) {
+        _effect.update {
+            UserContract.Effect.UserItemClick(id = id)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.maxbay.presentation.ui
+package com.maxbay.presentation.ui.users
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
