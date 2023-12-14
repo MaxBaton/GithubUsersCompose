@@ -57,9 +57,9 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
-    implementation(project(":feature-all-users:presentation"))
-    implementation(project(":feature-all-users:domain"))
-    implementation(project(":feature-all-users:data"))
+    implementation(project(":feature-users:presentation"))
+    implementation(project(":feature-users:domain"))
+    implementation(project(":feature-users:data"))
     implementation(project(":core:di"))
     implementation(project(":core:navigation"))
 

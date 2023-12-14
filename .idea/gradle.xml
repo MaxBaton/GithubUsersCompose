@@ -19,10 +19,10 @@
             <option value="$PROJECT_DIR$/core/di" />
             <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/ui" />
-            <option value="$PROJECT_DIR$/feature-all-users" />
-            <option value="$PROJECT_DIR$/feature-all-users/data" />
-            <option value="$PROJECT_DIR$/feature-all-users/domain" />
-            <option value="$PROJECT_DIR$/feature-all-users/presentation" />
+            <option value="$PROJECT_DIR$/feature-users" />
+            <option value="$PROJECT_DIR$/feature-users/data" />
+            <option value="$PROJECT_DIR$/feature-users/domain" />
+            <option value="$PROJECT_DIR$/feature-users/presentation" />
           </set>
         </option>
       </GradleProjectSettings>

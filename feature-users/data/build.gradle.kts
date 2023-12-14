@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature-all-users:domain"))
+    implementation(project(":feature-users:domain"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
