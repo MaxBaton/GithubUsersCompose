@@ -52,7 +52,7 @@ fun TopBarWithIconBack(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun TopBarWithIconBackPreview() {
+internal fun TopBarWithIconBackPreview() {
     GithubUsersComposeTheme {
         TopBarWithIconBack(title = "Title") {}
     }

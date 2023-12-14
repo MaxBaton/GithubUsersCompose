@@ -7,13 +7,14 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
+import com.maxbay.core.ui.widgets.FailMessageFullScreenItem
+import com.maxbay.core.ui.widgets.ProgressbarFullScreenItem
 import com.maxbay.core.ui.widgets.SearchField
 import com.maxbay.core.ui.widgets.Spacer8
 import com.maxbay.core.ui.widgets.topbar.TopBar
@@ -34,38 +35,17 @@ fun UsersScreen(
     ) {
         when(uiState.loadingState) {
             UserContract.State.LoadingState.Fail -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.fail_loading),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                }
+                FailMessageFullScreenItem(message = stringResource(id = R.string.fail_loading))
             }
 
             is UserContract.State.LoadingState.FailWithException -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.fail_loading_with_exception, uiState.loadingState.message),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                }
+                FailMessageFullScreenItem(message = stringResource(id = R.string.fail_loading_with_exception, uiState.loadingState.message),)
             }
+
             UserContract.State.LoadingState.Loading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                ProgressbarFullScreenItem()
             }
+
             is UserContract.State.LoadingState.Success -> {
                 Column {
                     TopBar(title = stringResource(id = R.string.title_users))

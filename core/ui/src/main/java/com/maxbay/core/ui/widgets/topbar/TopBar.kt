@@ -44,7 +44,7 @@ fun TopBar(title: String, modifier: Modifier = Modifier){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun TopBarPreview() {
+internal fun TopBarPreview() {
     GithubUsersComposeTheme {
         TopBarWithIconBack(title = "Title") {}
     }

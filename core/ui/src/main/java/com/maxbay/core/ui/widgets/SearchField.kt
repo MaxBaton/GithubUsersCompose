@@ -70,7 +70,7 @@ fun SearchField(
 
 @Preview(showBackground = true)
 @Composable
-fun SearchFieldPreview() {
+internal fun SearchFieldPreview() {
     GithubUsersComposeTheme {
         SearchField(
             value = "Hotel or city name",
