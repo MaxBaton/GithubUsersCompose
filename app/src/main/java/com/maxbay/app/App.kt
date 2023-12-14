@@ -21,6 +21,7 @@ import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
 import com.maxbay.domain.repository.UserRepository
 import com.maxbay.domain.usecase.GetUserByIdUseCase
 import com.maxbay.domain.usecase.ObserveUsersUseCase
+import com.maxbay.domain.usecase.SearchUsersUceCase
 import retrofit2.Retrofit
 
 
@@ -94,6 +95,11 @@ class App: Application() {
         di.add(
             key = ObserveUsersUseCase::class,
             object_ = ObserveUsersUseCase(repository = di.get(class_ = UserRepository::class))
+        )
+
+        di.add(
+            key = SearchUsersUceCase::class,
+            object_ = SearchUsersUceCase(repository = di.get(class_ = UserRepository::class))
         )
     }
 

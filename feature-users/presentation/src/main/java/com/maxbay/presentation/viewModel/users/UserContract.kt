@@ -13,11 +13,15 @@ interface UserContract: UnidirectionalViewModel<
         data object Loading: State
         data object Fail: State
         data class FailWithException(val message: String): State
-        data class Success(val users: List<User>): State
+        data class Success(
+            val users: List<User>,
+            val search: String
+        ): State
     }
 
     sealed interface Event {
         data class UserItemClick(val id: Int): Event
+        data class Search(val search: String): Event
     }
 
     sealed interface Effect {

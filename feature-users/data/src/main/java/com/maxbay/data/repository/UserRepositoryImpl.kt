@@ -38,6 +38,13 @@ class UserRepositoryImpl(
         return databaseStorage.getUserById(id = userId).toDomain()
     }
 
+    override suspend fun searchUsers(search: String) {
+        val usersDto = databaseStorage.getUsersByLoginOrId(value = search)
+        usersState.update {
+            usersDto.toDomain()
+        }
+    }
+
     private suspend fun getUsers(): List<User> {
         val currentTime = System.currentTimeMillis()
         val lastCacheTime = preferencesStorage.getLastTimeCache()

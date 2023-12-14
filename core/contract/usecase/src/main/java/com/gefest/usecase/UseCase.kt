@@ -9,3 +9,7 @@ interface UseCaseFlowWithoutParams<RESULT> {
 interface UseCaseSuspendWithOneParam<PARAM, RESULT> {
     suspend fun execute(param: PARAM): RESULT
 }
+
+interface UseCaseSuspendWithOneParamWithoutResult<PARAM> {
+    suspend fun execute(param: PARAM)
+}

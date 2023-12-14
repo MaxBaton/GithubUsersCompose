@@ -3,4 +3,5 @@
     <string name="title_users">Пользователи</string>
     <string name="fail_loading">Список пользователей пуст!</string>
     <string name="fail_loading_with_exception">Ошибка загрузки пользователей! %1$s</string>
+    <string name="search_place_holder">Логин или id</string>
 </resources>

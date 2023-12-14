@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
+import com.maxbay.core.ui.widgets.SearchField
+import com.maxbay.core.ui.widgets.Spacer8
 import com.maxbay.core.ui.widgets.topbar.TopBar
 import com.maxbay.presentation.R
 import com.maxbay.presentation.viewModel.users.UserContract
@@ -23,7 +25,8 @@ import com.maxbay.presentation.viewModel.users.UserContract
 fun UsersScreen(
     uiState: UserContract.State,
     modifier: Modifier = Modifier,
-    onItemClick: (id: Int) -> Unit
+    onItemClick: (id: Int) -> Unit,
+    onSearch: (value: String) -> Unit
 ) {
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -64,11 +67,20 @@ fun UsersScreen(
             }
             is UserContract.State.Success -> {
                 Column {
-                    TopBar(title = stringResource(id = R.string.title_users),)
+                    TopBar(title = stringResource(id = R.string.title_users))
+                    Spacer8()
+                    SearchField(
+                        value = uiState.search,
+                        onValueChange = onSearch,
+                        placeholderResId = R.string.search_place_holder,
+                        leadingIconResId = R.drawable.ic_search
+                    )
+                    Spacer8()
                     UserItems(
                         users = uiState.users,
                         onItemClick = onItemClick
                     )
+                    Spacer8()
                 }
             }
         }
@@ -82,7 +94,8 @@ fun UsersScreenPreview() {
         UsersScreen(
             uiState = UserContract.State.Loading,
             modifier = Modifier.fillMaxSize(),
-            onItemClick = {}
+            onItemClick = {},
+            onSearch = {}
         )
     }
 }

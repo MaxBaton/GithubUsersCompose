@@ -4,7 +4,6 @@ import com.maxbay.data.storage.database.api.DatabaseStorage
 import com.maxbay.data.storage.database.dao.UserDao
 import com.maxbay.data.storage.database.dto.UserDto
 import com.maxbay.data.storage.database.entities.UserEntity
-import kotlinx.coroutines.flow.Flow
 
 class DatabaseStorageImpl(private val dao: UserDao): DatabaseStorage {
     override suspend fun getAllUsers(): List<UserDto> {
@@ -17,5 +16,9 @@ class DatabaseStorageImpl(private val dao: UserDao): DatabaseStorage {
 
     override suspend fun getUserById(id: Int): UserDto {
         return dao.getUserById(id = id)
+    }
+
+    override suspend fun getUsersByLoginOrId(value: String): List<UserDto> {
+        return dao.getUsersByLoginOrId(value = value)
     }
 }
