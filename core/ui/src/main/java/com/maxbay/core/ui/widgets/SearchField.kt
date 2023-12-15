@@ -42,7 +42,7 @@ fun SearchField(
             Text(
                 text = stringResource(id = placeholderResId),
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         },
         visualTransformation = visualTransformation,
@@ -59,8 +59,8 @@ fun SearchField(
 
         },
         colors = OutlinedTextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
+            focusedContainerColor = MaterialTheme.colorScheme.tertiary,
+            unfocusedContainerColor = MaterialTheme.colorScheme.tertiary,
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         )
@@ -75,7 +75,7 @@ internal fun SearchFieldPreview() {
         SearchField(
             value = "Hotel or city name",
             placeholderResId = androidx.compose.material3.R.string.search_bar_search,
-            leadingIconResId = R.drawable.ic_left_arrow,
+            leadingIconResId = com.google.android.material.R.drawable.ic_search_black_24,
             onValueChange = {},
         )
     }

@@ -3,6 +3,7 @@ package com.maxbay.presentation.ui.users
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -54,6 +55,7 @@ fun UsersScreen(
                     Spacer8()
                     Column(modifier = Modifier.padding(horizontal = padding16)) {
                         SearchField(
+                            modifier = Modifier.fillMaxWidth(),
                             value = uiState.search,
                             onValueChange = onSearch,
                             placeholderResId = R.string.search_place_holder,
