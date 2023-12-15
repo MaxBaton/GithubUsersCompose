@@ -85,3 +85,5 @@ local.properties
 /core/contract/usecase/build/.transforms/04fd2817b2454c7e39c36f93528c16e2/transformed/main/main_dex/com/gefest/usecase/UseCaseSuspendWithOneParam.dex
 /core/contract/usecase/build/classes/kotlin/main/com/gefest/usecase/UseCaseSuspendWithOneParamWithoutResult.class
 /core/contract/usecase/build/.transforms/04fd2817b2454c7e39c36f93528c16e2/transformed/main/main_dex/com/gefest/usecase/UseCaseSuspendWithOneParamWithoutResult.dex
+/core/contract/usecase/build/.transforms/fb5339cb7ae19ec31a94300f50510c44/transformed/main/main_dex/com/gefest/usecase/UseCaseSuspendWithOneParam.dex
+/core/contract/usecase/build/.transforms/fb5339cb7ae19ec31a94300f50510c44/transformed/main/main_dex/com/gefest/usecase/UseCaseSuspendWithOneParamWithoutResult.dex
