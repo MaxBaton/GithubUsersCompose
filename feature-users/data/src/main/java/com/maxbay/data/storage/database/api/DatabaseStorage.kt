@@ -7,6 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface DatabaseStorage {
     suspend fun getAllUsers(): List<UserDto>
     suspend fun addAllUsers(users: List<UserEntity>)
-    suspend fun getUserById(id: Int): UserDto
     suspend fun getUsersByLoginOrId(value: String): List<UserDto>
 }

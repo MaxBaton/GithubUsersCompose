@@ -9,7 +9,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.gefest.di.DiProvider
-import com.maxbay.domain.usecase.GetUserByIdUseCase
 import com.maxbay.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.navigation.NavDestination
 import com.maxbay.presentation.ui.userDetails.UserDetailsScreen
@@ -24,7 +23,6 @@ fun NavGraphBuilder.userDetails(onUpClick: () -> Unit) {
         val viewModel: UserDetailsViewModel = viewModel(
             factory = UserDetailsViewModel.Factory(
                 userId = userId,
-                getUserByIdUseCase = DiProvider.di.get(class_ = GetUserByIdUseCase::class),
                 getUserDetailsByIdUseCase = DiProvider.di.get(class_ = GetUserDetailsByIdUseCase::class)
             )
         )

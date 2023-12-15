@@ -19,7 +19,6 @@ import com.maxbay.data.storage.database.impl.DatabaseStorageImpl
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
 import com.maxbay.domain.repository.UserRepository
-import com.maxbay.domain.usecase.GetUserByIdUseCase
 import com.maxbay.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import com.maxbay.domain.usecase.SearchUsersUceCase
@@ -105,11 +104,6 @@ class App: Application() {
     }
 
     private fun initFeatureUserDetails(di: GlobalDi) {
-        di.add(
-            key = GetUserByIdUseCase::class,
-            object_ = GetUserByIdUseCase(repository = di.get(class_ = UserRepository::class))
-        )
-
         di.add(
             key = GetUserDetailsByIdUseCase::class,
             object_ = GetUserDetailsByIdUseCase(repository = di.get(class_ = UserRepository::class))

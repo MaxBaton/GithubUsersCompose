@@ -3,7 +3,6 @@ package com.maxbay.presentation.viewModel.userDetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.maxbay.domain.usecase.GetUserByIdUseCase
 import com.maxbay.domain.usecase.GetUserDetailsByIdUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 
 class UserDetailsViewModel(
     private val userId: Int,
-    private val getUserByIdUseCase: GetUserByIdUseCase,
     private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
 ): ViewModel(), UserDetailContract {
     private val _uiState = MutableStateFlow<UserDetailContract.State>(UserDetailContract.State.Loading)
@@ -54,13 +52,11 @@ class UserDetailsViewModel(
 
     internal class Factory(
         private val userId: Int,
-        private val getUserByIdUseCase: GetUserByIdUseCase,
         private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
     ): ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return UserDetailsViewModel(
                 userId = userId,
-                getUserByIdUseCase = getUserByIdUseCase,
                 getUserDetailsByIdUseCase = getUserDetailsByIdUseCase
             ) as T
         }

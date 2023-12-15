@@ -11,8 +11,6 @@ import com.maxbay.data.utils.ZERO_LONG_VALUE
 import com.maxbay.domain.models.User
 import com.maxbay.domain.models.UserDetails
 import com.maxbay.domain.repository.UserRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,8 +18,7 @@ import kotlinx.coroutines.flow.update
 class UserRepositoryImpl(
     private val userApi: UserApi,
     private val preferencesStorage: PreferencesStorage,
-    private val databaseStorage: DatabaseStorage,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val databaseStorage: DatabaseStorage
 ): UserRepository {
     private val usersState = MutableStateFlow<List<User>>(emptyList())
 
@@ -32,10 +29,6 @@ class UserRepositoryImpl(
         }
 
         return usersState
-    }
-
-    override suspend fun getUserById(userId: Int): User {
-        return databaseStorage.getUserById(id = userId).toDomain()
     }
 
     override suspend fun searchUsers(search: String) {
