@@ -2,7 +2,6 @@ package com.maxbay.presentation.ui.userDetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -11,9 +10,7 @@ import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 import com.maxbay.core.ui.widgets.FailMessageFullScreenItem
 import com.maxbay.core.ui.widgets.ProgressbarFullScreenItem
 import com.maxbay.core.ui.widgets.Spacer8
-import com.maxbay.core.ui.widgets.topbar.TopBar
 import com.maxbay.core.ui.widgets.topbar.TopBarWithIconBack
-import com.maxbay.domain.models.User
 import com.maxbay.presentation.R
 import com.maxbay.presentation.viewModel.userDetails.UserDetailContract
 
@@ -36,11 +33,11 @@ fun UserDetailsScreen(
         is UserDetailContract.State.Success -> {
             Column(modifier = modifier) {
                 TopBarWithIconBack(
-                    title = uiState.user.login,
+                    title = uiState.userDetails.login,
                     onClickUpButton = onUpClick
                 )
                 Spacer8()
-                UserDetailsItem(user = uiState.user)
+                UserDetailsItem(userDetails = uiState.userDetails)
             }
         }
     }

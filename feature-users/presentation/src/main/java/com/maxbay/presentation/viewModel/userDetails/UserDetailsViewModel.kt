@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.maxbay.domain.usecase.GetUserByIdUseCase
+import com.maxbay.domain.usecase.GetUserDetailsByIdUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class UserDetailsViewModel(
     private val userId: Int,
-    private val getUserByIdUseCase: GetUserByIdUseCase
+    private val getUserByIdUseCase: GetUserByIdUseCase,
+    private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
 ): ViewModel(), UserDetailContract {
     private val _uiState = MutableStateFlow<UserDetailContract.State>(UserDetailContract.State.Loading)
     override val uiState: StateFlow<UserDetailContract.State> = _uiState.asStateFlow()
@@ -43,21 +45,23 @@ class UserDetailsViewModel(
         }
 
         viewModelScope.launch(exceptionHandler) {
-            val user = getUserByIdUseCase.execute(param = userId)
+            val userDetails = getUserDetailsByIdUseCase.execute(param = userId)
             _uiState.update {
-                UserDetailContract.State.Success(user = user)
+                UserDetailContract.State.Success(userDetails = userDetails)
             }
         }
     }
 
     internal class Factory(
         private val userId: Int,
-        private val getUserByIdUseCase: GetUserByIdUseCase
+        private val getUserByIdUseCase: GetUserByIdUseCase,
+        private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
     ): ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return UserDetailsViewModel(
                 userId = userId,
-                getUserByIdUseCase = getUserByIdUseCase
+                getUserByIdUseCase = getUserByIdUseCase,
+                getUserDetailsByIdUseCase = getUserDetailsByIdUseCase
             ) as T
         }
     }

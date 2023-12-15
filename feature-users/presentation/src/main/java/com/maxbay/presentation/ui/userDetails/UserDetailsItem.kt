@@ -5,14 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
-import com.maxbay.domain.models.User
+import com.maxbay.domain.models.UserDetails
 
 @Composable
 fun UserDetailsItem(
-    user: User,
+    userDetails: UserDetails,
     modifier: Modifier = Modifier
 ) {
-    Text(text = user.login)
+    Text(text = "${userDetails.name}\n${userDetails.email}\n${userDetails.company}")
 }
 
 @Composable
