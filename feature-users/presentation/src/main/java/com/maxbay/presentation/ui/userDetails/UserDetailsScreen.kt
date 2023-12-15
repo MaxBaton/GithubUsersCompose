@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 import com.maxbay.core.ui.widgets.FailMessageFullScreenItem
 import com.maxbay.core.ui.widgets.ProgressbarFullScreenItem
+import com.maxbay.core.ui.widgets.Spacer16
 import com.maxbay.core.ui.widgets.Spacer8
 import com.maxbay.core.ui.widgets.topbar.TopBarWithIconBack
 import com.maxbay.presentation.R
@@ -33,10 +34,10 @@ fun UserDetailsScreen(
         is UserDetailContract.State.Success -> {
             Column(modifier = modifier) {
                 TopBarWithIconBack(
-                    title = uiState.userDetails.login,
+                    title = uiState.userDetails.name,
                     onClickUpButton = onUpClick
                 )
-                Spacer8()
+                Spacer16()
                 UserDetailsItem(userDetails = uiState.userDetails)
             }
         }

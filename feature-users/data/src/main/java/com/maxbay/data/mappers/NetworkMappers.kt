@@ -6,7 +6,7 @@ import com.maxbay.data.storage.database.entities.UserEntity
 import com.maxbay.domain.models.User
 import com.maxbay.domain.models.UserDetails
 
-private const val EMPTY = ""
+private const val NULL_STR_REPLACEMENT = "-"
 
 private fun UserItem.toDomain() = User(
     id = this.id,
@@ -30,12 +30,12 @@ private fun UserItem.toEntity() = UserEntity(
 
 internal fun UserDetailsItem.toDomain() = UserDetails(
     id = this.id,
-    login = this.login ?: EMPTY,
-    email = this.email ?: EMPTY,
-    name = this.name ?: EMPTY,
-    location = this.location ?: EMPTY,
-    avatarUrl = this.avatarUrl ?: EMPTY,
-    company = this.company ?: EMPTY
+    login = this.login ?: NULL_STR_REPLACEMENT,
+    email = this.email ?: NULL_STR_REPLACEMENT,
+    name = this.name ?: NULL_STR_REPLACEMENT,
+    location = this.location ?: NULL_STR_REPLACEMENT,
+    avatarUrl = this.avatarUrl ?: NULL_STR_REPLACEMENT,
+    company = this.company ?: NULL_STR_REPLACEMENT
 )
 
 internal fun List<UserItem>.toDomain() = this.map { it.toDomain() }
