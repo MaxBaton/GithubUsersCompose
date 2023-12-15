@@ -1,5 +1,6 @@
 package com.maxbay.core.ui.widgets.topbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -7,6 +8,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -21,7 +24,7 @@ import com.maxbay.core.ui.theme.zeroValue
 @Composable
 fun TopBar(title: String, modifier: Modifier = Modifier){
     CenterAlignedTopAppBar(
-        modifier = modifier,
+        modifier = modifier.background(color = MaterialTheme.colorScheme.onPrimary),
         title = {
             Text(
                 text = title,
@@ -37,6 +40,9 @@ fun TopBar(title: String, modifier: Modifier = Modifier){
             right = zeroValue,
             top = zeroValue,
             bottom = zeroValue
+        ),
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.tertiary
         )
     )
 }

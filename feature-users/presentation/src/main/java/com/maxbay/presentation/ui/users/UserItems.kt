@@ -1,5 +1,6 @@
 package com.maxbay.presentation.ui.users
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,7 +19,7 @@ fun UserItems(
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(space16)
+        verticalArrangement = Arrangement.spacedBy(space16)
     ) {
         items(users) { user ->
             UserItem(

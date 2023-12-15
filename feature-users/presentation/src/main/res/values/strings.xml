@@ -5,4 +5,7 @@
     <string name="fail_loading_with_exception">Ошибка загрузки пользователей! %1$s</string>
     <string name="search_place_holder">Логин или id</string>
     <string name="fail_load_user_data">Не удалось загрузить данные пользователя!</string>
+
+<!--    Icon descriptions-->
+    <string name="ic_user_avatar_description">Аватар пользователя - %1$s</string>
 </resources>

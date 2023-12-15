@@ -3,6 +3,7 @@ package com.maxbay.presentation.ui.users
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
+import com.maxbay.core.ui.theme.padding16
 import com.maxbay.core.ui.widgets.FailMessageFullScreenItem
 import com.maxbay.core.ui.widgets.ProgressbarFullScreenItem
 import com.maxbay.core.ui.widgets.SearchField
@@ -50,18 +52,20 @@ fun UsersScreen(
                 Column {
                     TopBar(title = stringResource(id = R.string.title_users))
                     Spacer8()
-                    SearchField(
-                        value = uiState.search,
-                        onValueChange = onSearch,
-                        placeholderResId = R.string.search_place_holder,
-                        leadingIconResId = R.drawable.ic_search
-                    )
-                    Spacer8()
-                    UserItems(
-                        users = uiState.users,
-                        onItemClick = onItemClick
-                    )
-                    Spacer8()
+                    Column(modifier = Modifier.padding(horizontal = padding16)) {
+                        SearchField(
+                            value = uiState.search,
+                            onValueChange = onSearch,
+                            placeholderResId = R.string.search_place_holder,
+                            leadingIconResId = R.drawable.ic_search
+                        )
+                        Spacer8()
+                        UserItems(
+                            users = uiState.users,
+                            onItemClick = onItemClick
+                        )
+                        Spacer8()
+                    }
                 }
             }
         }
