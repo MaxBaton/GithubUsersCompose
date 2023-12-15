@@ -14,6 +14,7 @@ import com.maxbay.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import retrofit2.HttpException
 
 class UserRepositoryImpl(
     private val userApi: UserApi,
@@ -51,13 +52,17 @@ class UserRepositoryImpl(
         )
 
         return if (isNeedGettingFromNetwork) {
-            val usersNetwork = userApi.getAllUsers()
-            val usersEntity = usersNetwork.toEntity()
+            try {
+                val usersNetwork = userApi.getAllUsers()
+                val usersEntity = usersNetwork.toEntity()
 
-            databaseStorage.addAllUsers(users = usersEntity)
-            preferencesStorage.saveLastTimeCache(time = currentTime)
+                databaseStorage.addAllUsers(users = usersEntity)
+                preferencesStorage.saveLastTimeCache(time = currentTime)
 
-            usersNetwork.toDomain()
+                usersNetwork.toDomain()
+            }catch (e: HttpException) {
+                databaseStorage.getAllUsers().toDomain()
+            }
         }else {
             databaseStorage.getAllUsers().toDomain()
         }
