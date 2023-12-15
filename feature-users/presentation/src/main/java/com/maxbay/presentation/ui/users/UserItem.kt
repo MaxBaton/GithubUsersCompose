@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -20,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 import com.maxbay.core.ui.theme.corner16
 import com.maxbay.core.ui.theme.elevation5
+import com.maxbay.core.ui.theme.itemHeight200
 import com.maxbay.core.ui.theme.padding16
 import com.maxbay.core.ui.theme.padding8
 import com.maxbay.core.ui.widgets.Spacer8
@@ -43,7 +41,7 @@ fun UserItem(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(itemHeight200)
             .shadow(
                 elevation = elevation5,
                 shape = RoundedCornerShape(size = corner16)
@@ -52,7 +50,7 @@ fun UserItem(
                 color = MaterialTheme.colorScheme.tertiary,
                 shape = RoundedCornerShape(size = corner16)
             )
-            .padding(vertical = padding16)
+            .padding(vertical = padding8)
     ) {
         Row(
             modifier = Modifier
@@ -60,15 +58,22 @@ fun UserItem(
                 .clickable { onItemClick(user.id) }
         ) {
             Column {
-                AsyncImage(
+                Box(
                     modifier = Modifier
-                        .clip(shape = CircleShape)
                         .weight(0.8f)
-                        .fillMaxWidth()
-                        .padding(top = padding8),
-                    model = user.avatarUrl,
-                    contentDescription = stringResource(id = R.string.ic_user_avatar_description, user.login)
-                )
+                        .fillMaxHeight()
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(vertical = padding8)
+                            .clip(shape = CircleShape),
+                        model = user.avatarUrl,
+                        contentDescription = stringResource(id = R.string.ic_user_avatar_description, user.login)
+                    )
+                }
 
                 Spacer8()
 
