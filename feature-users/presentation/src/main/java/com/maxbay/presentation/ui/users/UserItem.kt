@@ -25,7 +25,6 @@ import com.maxbay.core.ui.theme.GithubUsersComposeTheme
 import com.maxbay.core.ui.theme.corner16
 import com.maxbay.core.ui.theme.elevation5
 import com.maxbay.core.ui.theme.itemHeight200
-import com.maxbay.core.ui.theme.padding16
 import com.maxbay.core.ui.theme.padding8
 import com.maxbay.core.ui.widgets.Spacer8
 import com.maxbay.domain.models.User
