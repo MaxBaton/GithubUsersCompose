@@ -11,8 +11,10 @@ import androidx.navigation.navArgument
 import com.gefest.di.DiProvider
 import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.githubuserscompose.presentation.ui.UserDetailsScreen
+import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailContract
 import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailsViewModel
 import com.maxbay.navigation.NavDestination
+import com.maxbay.viewmodel.userEffects
 
 fun NavGraphBuilder.userDetails(onUpClick: () -> Unit) {
     composable(
@@ -28,9 +30,18 @@ fun NavGraphBuilder.userDetails(onUpClick: () -> Unit) {
         )
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+        viewModel.userEffects { effect ->
+            when(effect) {
+                UserDetailContract.Effect.UpButtonClick -> onUpClick()
+                null -> Unit
+            }
+        }
+
         UserDetailsScreen(
             uiState = uiState,
-            onUpClick = onUpClick
+            onUpClick = {
+                viewModel.handleEvent(event = UserDetailContract.Event.UpButtonClick)
+            }
         )
     }
 }

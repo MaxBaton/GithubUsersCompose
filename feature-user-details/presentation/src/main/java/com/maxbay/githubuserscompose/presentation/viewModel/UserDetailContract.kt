@@ -15,10 +15,10 @@ interface UserDetailContract: UnidirectionalViewModel<
     }
 
     sealed interface Event {
-
+        data object UpButtonClick: Event
     }
 
     sealed interface Effect {
-
+        data object UpButtonClick: Effect
     }
 }

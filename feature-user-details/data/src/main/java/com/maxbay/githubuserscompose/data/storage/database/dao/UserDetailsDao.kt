@@ -22,7 +22,7 @@ interface UserDetailsDao {
         "${UserDetailsEntity.LOCATION} as ${UserDetailsDto.LOCATION}, " +
         "${UserDetailsEntity.NAME} as ${UserDetailsDto.NAME} " +
         "from ${UserDetailsEntity.TABLE_NAME} " +
-        "where ${UserDetailsEntity.ID} = :id"
+        "where ${UserDetailsEntity.LOGIN} = :id"
     )
     suspend fun getUserDetailsById(id: Int): UserDetailsDto
 }

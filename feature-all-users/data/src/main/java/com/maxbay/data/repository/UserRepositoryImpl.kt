@@ -5,11 +5,9 @@ import com.maxbay.data.mappers.toEntity
 import com.maxbay.data.network.UserApi
 import com.maxbay.data.storage.database.api.DatabaseStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
-import com.maxbay.data.utils.MILLISECOND_IN_HOURS_COEFF
-import com.maxbay.data.utils.ONE_HOUR_LONG_VALUE
-import com.maxbay.data.utils.ZERO_LONG_VALUE
 import com.maxbay.domain.models.User
 import com.maxbay.domain.repository.UserRepository
+import com.maxbay.githubuserscompose.data.isDifferenceMoreThanHour
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -41,7 +39,7 @@ class UserRepositoryImpl(
     private suspend fun getUsers(): List<User> {
         val currentTime = System.currentTimeMillis()
         val lastCacheTime = preferencesStorage.getLastTimeCache()
-        val isNeedGettingFromNetwork = isDifferenceMoreThanMinute(
+        val isNeedGettingFromNetwork = isDifferenceMoreThanHour(
             startTime = lastCacheTime,
             endTime = currentTime
         )
@@ -60,16 +58,6 @@ class UserRepositoryImpl(
             }
         }else {
             databaseStorage.getAllUsers().toDomain()
-        }
-    }
-
-    private fun isDifferenceMoreThanMinute(startTime: Long, endTime: Long): Boolean {
-        return if (endTime > ZERO_LONG_VALUE) {
-            val diffMilliSeconds = endTime - startTime
-            val diffMinutes = diffMilliSeconds / MILLISECOND_IN_HOURS_COEFF
-            diffMinutes >= ONE_HOUR_LONG_VALUE
-        }else {
-            true
         }
     }
 }
