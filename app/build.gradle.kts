@@ -60,9 +60,9 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:navigation"))
     // All users
-    implementation(project(":feature-users:presentation"))
-    implementation(project(":feature-users:domain"))
-    implementation(project(":feature-users:data"))
+    implementation(project(":feature-all-users:presentation"))
+    implementation(project(":feature-all-users:domain"))
+    implementation(project(":feature-all-users:data"))
     // User details
     implementation(project(":feature-user-details:presentation"))
     implementation(project(":feature-user-details:domain"))
