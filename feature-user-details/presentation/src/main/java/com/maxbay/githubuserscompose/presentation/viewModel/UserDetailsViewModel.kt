@@ -26,7 +26,9 @@ class UserDetailsViewModel(
     }
 
     override fun handleEvent(event: UserDetailContract.Event) {
-        TODO("Not yet implemented")
+        when(event) {
+            UserDetailContract.Event.UpButtonClick -> onUpButtonClick()
+        }
     }
 
     override fun consume() {
@@ -47,6 +49,12 @@ class UserDetailsViewModel(
             _uiState.update {
                 UserDetailContract.State.Success(userDetails = userDetails)
             }
+        }
+    }
+
+    private fun onUpButtonClick() {
+        _effect.update {
+            UserDetailContract.Effect.UpButtonClick
         }
     }
 
