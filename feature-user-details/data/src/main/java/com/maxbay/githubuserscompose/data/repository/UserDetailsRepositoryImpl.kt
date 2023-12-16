@@ -13,7 +13,7 @@ class UserDetailsRepositoryImpl(
     private val databaseStorage: DatabaseUserDetailsStorage
 ): UserDetailsRepository {
     override suspend fun getUserDetailsById(id: Int): UserDetails {
-        val isNeedGettingFromNetwork = true
+        val isNeedGettingFromNetwork = false//true
         val users = if (isNeedGettingFromNetwork) {
             try {
                 val userDetailsNetwork = userDetailsApi.getUserDetailsById(id = id)
