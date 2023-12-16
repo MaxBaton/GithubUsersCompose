@@ -6,16 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.maxbay.data.storage.database.dao.UserDao
 import com.maxbay.data.storage.database.entities.UserEntity
+import com.maxbay.githubuserscompose.data.storage.database.dao.UserDetailsDao
+import com.maxbay.githubuserscompose.data.storage.database.entities.UserDetailsEntity
 
-private const val DATABASE_VERSION = 1
+private const val DATABASE_VERSION = 2
 private const val DATABASE_NAME = "github_users"
 
 @Database(
     version = DATABASE_VERSION,
-    entities = [UserEntity::class]
+    entities = [UserEntity::class, UserDetailsEntity::class],
+    exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun userDetailsDao(): UserDetailsDao
 
     companion object {
         @Volatile

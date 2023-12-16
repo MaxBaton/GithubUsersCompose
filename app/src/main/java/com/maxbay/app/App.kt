@@ -21,6 +21,9 @@ import com.maxbay.domain.usecase.ObserveUsersUseCase
 import com.maxbay.domain.usecase.SearchUsersUceCase
 import com.maxbay.githubuserscompose.data.network.UserDetailsApi
 import com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl
+import com.maxbay.githubuserscompose.data.storage.database.api.DatabaseUserDetailsStorage
+import com.maxbay.githubuserscompose.data.storage.database.dao.UserDetailsDao
+import com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseUserDetailsStorageImpl
 import com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository
 import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import retrofit2.Retrofit
@@ -106,9 +109,20 @@ class App: Application() {
         )
 
         di.add(
+            key = UserDetailsDao::class,
+            object_ = di.get(class_ = AppDatabase::class).userDetailsDao()
+        )
+
+        di.add(
+            key = DatabaseUserDetailsStorage::class,
+            object_ = DatabaseUserDetailsStorageImpl(dao = di.get(class_ = UserDetailsDao::class))
+        )
+
+        di.add(
             key = UserDetailsRepository::class,
             object_ = UserDetailsRepositoryImpl(
-                userDetailsApi = di.get(class_ = UserDetailsApi::class)
+                userDetailsApi = di.get(class_ = UserDetailsApi::class),
+                databaseStorage = di.get(class_ = DatabaseUserDetailsStorage::class)
             )
         )
 
