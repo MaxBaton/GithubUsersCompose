@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":feature-user-details:domain"))
+    implementation(project(":core:utils:data"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
