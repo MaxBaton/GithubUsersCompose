@@ -1,4 +1,4 @@
-package com.maxbay.data.network.api
+package com.maxbay.data.network
 
 import com.maxbay.data.models.UserItem
 import retrofit2.http.GET

@@ -8,10 +8,8 @@ import com.gefest.di.DiProvider
 import com.gefest.di.GlobalDi
 import com.maxbay.app.db.AppDatabase
 import com.maxbay.app.di.GlobalDiImpl
-import com.maxbay.data.network.api.UserApi
-import com.maxbay.data.network.api.UserApiHelper
-import com.maxbay.data.network.factory.AppRetrofit
-import com.maxbay.data.network.impl.UserApiHelperImpl
+import com.maxbay.data.network.UserApi
+import com.maxbay.app.network.AppRetrofit
 import com.maxbay.data.repository.UserRepositoryImpl
 import com.maxbay.data.storage.database.api.DatabaseStorage
 import com.maxbay.data.storage.database.dao.UserDao
@@ -19,14 +17,13 @@ import com.maxbay.data.storage.database.impl.DatabaseStorageImpl
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
 import com.maxbay.domain.repository.UserRepository
-import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import com.maxbay.domain.usecase.SearchUsersUceCase
 import com.maxbay.githubuserscompose.data.network.UserDetailsApi
 import com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl
 import com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository
+import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import retrofit2.Retrofit
-import retrofit2.create
 
 
 private const val DATA_STORE_NAME = "github_users_app_data_store"
@@ -70,11 +67,6 @@ class App: Application() {
         di.add(
             key = UserApi::class,
             object_ = di.get(class_ = Retrofit::class).create(UserApi::class.java)
-        )
-
-        di.add(
-            key = UserApiHelper::class,
-            object_ = UserApiHelperImpl(userApi = di.get(class_ = UserApi::class))
         )
 
         di.add(

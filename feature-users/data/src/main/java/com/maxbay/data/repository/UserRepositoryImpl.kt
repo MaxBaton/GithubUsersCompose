@@ -2,7 +2,7 @@ package com.maxbay.data.repository
 
 import com.maxbay.data.mappers.toDomain
 import com.maxbay.data.mappers.toEntity
-import com.maxbay.data.network.api.UserApi
+import com.maxbay.data.network.UserApi
 import com.maxbay.data.storage.database.api.DatabaseStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.utils.MILLISECOND_IN_MINUTES_COEFF

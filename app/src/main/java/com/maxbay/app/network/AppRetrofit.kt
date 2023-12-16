@@ -1,4 +1,4 @@
-package com.maxbay.data.network.factory
+package com.maxbay.app.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
