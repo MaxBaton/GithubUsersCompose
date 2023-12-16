@@ -4,19 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.maxbay.presentation.navigation.USERS_ROUTE
-import com.maxbay.presentation.navigation.navigateToUserDetails
-import com.maxbay.presentation.navigation.users
+import com.maxbay.githubuserscompose.presentation.navigation.navigateToUserDetails
+import com.maxbay.githubuserscompose.presentation.navigation.userDetails
+import com.maxbay.presentation.navigation.AllUsersDestination
+import com.maxbay.presentation.navigation.allUsers
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = USERS_ROUTE
+        startDestination = AllUsersDestination.route
     ) {
-        users(
-            onItemClick = navController::navigateToUserDetails,
-            onUpClick = navController::popBackStack
-        )
+        allUsers(onItemClick = navController::navigateToUserDetails)
+        userDetails(onUpClick = navController::popBackStack)
     }
 }

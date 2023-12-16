@@ -19,10 +19,14 @@ import com.maxbay.data.storage.database.impl.DatabaseStorageImpl
 import com.maxbay.data.storage.prefrenses.PreferencesStorage
 import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
 import com.maxbay.domain.repository.UserRepository
-import com.maxbay.domain.usecase.GetUserDetailsByIdUseCase
+import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import com.maxbay.domain.usecase.SearchUsersUceCase
+import com.maxbay.githubuserscompose.data.network.UserDetailsApi
+import com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl
+import com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository
 import retrofit2.Retrofit
+import retrofit2.create
 
 
 private const val DATA_STORE_NAME = "github_users_app_data_store"
@@ -105,8 +109,20 @@ class App: Application() {
 
     private fun initFeatureUserDetails(di: GlobalDi) {
         di.add(
+            key = UserDetailsApi::class,
+            object_ = di.get(class_ = Retrofit::class).create(UserDetailsApi::class.java)
+        )
+
+        di.add(
+            key = UserDetailsRepository::class,
+            object_ = UserDetailsRepositoryImpl(
+                userDetailsApi = di.get(class_ = UserDetailsApi::class)
+            )
+        )
+
+        di.add(
             key = GetUserDetailsByIdUseCase::class,
-            object_ = GetUserDetailsByIdUseCase(repository = di.get(class_ = UserRepository::class))
+            object_ = GetUserDetailsByIdUseCase(repository = di.get(class_ = UserDetailsRepository::class))
         )
     }
 }

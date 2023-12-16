@@ -1,4 +1,0 @@
-com.maxbay.presentation
-string fail_loading
-string fail_loading_with_exception
-string title_users

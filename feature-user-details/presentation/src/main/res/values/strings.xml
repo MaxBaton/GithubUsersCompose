@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_info_title_template">%1$s:</string>
+    <string name="email">Email</string>
+    <string name="location">Город</string>
+    <string name="company">Компания</string>
+    <string name="fail_load_user_data">Не удалось загрузить данные пользователя!</string>
+
+    <!--    Icon descriptions-->
+    <string name="ic_user_details_avatar_description">Аватар пользователя - %1$s</string>
+</resources>

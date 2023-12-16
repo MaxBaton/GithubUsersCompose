@@ -9,7 +9,6 @@ import com.maxbay.data.utils.MILLISECOND_IN_MINUTES_COEFF
 import com.maxbay.data.utils.ONE_MINUTE_LONG_VALUE
 import com.maxbay.data.utils.ZERO_LONG_VALUE
 import com.maxbay.domain.models.User
-import com.maxbay.domain.models.UserDetails
 import com.maxbay.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,10 +36,6 @@ class UserRepositoryImpl(
         usersState.update {
             usersDto.toDomain()
         }
-    }
-
-    override suspend fun getUserDetailsById(id: Int): UserDetails {
-        return userApi.getUserDetailsById(id = id).toDomain()
     }
 
     private suspend fun getUsers(): List<User> {

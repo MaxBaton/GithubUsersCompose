@@ -57,11 +57,16 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":core:di"))
+    implementation(project(":core:navigation"))
+    // All users
     implementation(project(":feature-users:presentation"))
     implementation(project(":feature-users:domain"))
     implementation(project(":feature-users:data"))
-    implementation(project(":core:di"))
-    implementation(project(":core:navigation"))
+    // User details
+    implementation(project(":feature-user-details:presentation"))
+    implementation(project(":feature-user-details:domain"))
+    implementation(project(":feature-user-details:data"))
 
     implementation(libs.core.ktx)
 

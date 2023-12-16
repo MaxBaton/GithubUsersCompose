@@ -1,3 +1,0 @@
-int string fail_loading 0x0
-int string fail_loading_with_exception 0x0
-int string title_users 0x0

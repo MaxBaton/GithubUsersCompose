@@ -9,9 +9,9 @@ import com.gefest.di.DiProvider
 import com.maxbay.domain.usecase.ObserveUsersUseCase
 import com.maxbay.domain.usecase.SearchUsersUceCase
 import com.maxbay.navigation.NavDestination
-import com.maxbay.presentation.ui.users.UsersScreen
-import com.maxbay.presentation.viewModel.users.UserContract
-import com.maxbay.presentation.viewModel.users.UserViewModel
+import com.maxbay.presentation.ui.UsersScreen
+import com.maxbay.presentation.viewModel.UserContract
+import com.maxbay.presentation.viewModel.UserViewModel
 import com.maxbay.viewmodel.userEffects
 
 fun NavGraphBuilder.allUsers(onItemClick: (id: Int) -> Unit) {

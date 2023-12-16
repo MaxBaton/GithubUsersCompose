@@ -19,6 +19,10 @@
             <option value="$PROJECT_DIR$/core/di" />
             <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/ui" />
+            <option value="$PROJECT_DIR$/feature-user-details" />
+            <option value="$PROJECT_DIR$/feature-user-details/data" />
+            <option value="$PROJECT_DIR$/feature-user-details/domain" />
+            <option value="$PROJECT_DIR$/feature-user-details/presentation" />
             <option value="$PROJECT_DIR$/feature-users" />
             <option value="$PROJECT_DIR$/feature-users/data" />
             <option value="$PROJECT_DIR$/feature-users/domain" />
