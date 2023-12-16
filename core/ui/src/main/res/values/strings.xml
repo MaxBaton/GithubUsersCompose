@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Icon description-->
+    <string name="ic_arrow_back_description">Кнопка назад</string>
+</resources>

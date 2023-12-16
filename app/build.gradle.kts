@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     id("kotlin-parcelize")
+    alias(libs.plugins.devtools.ksp)
 }
 
 val githubUsersApi: String = gradleLocalProperties(rootDir).getProperty("GITHUB_USERS_API")
@@ -55,6 +56,18 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ui"))
+    implementation(project(":core:di"))
+    implementation(project(":core:navigation"))
+    // All users
+    implementation(project(":feature-all-users:presentation"))
+    implementation(project(":feature-all-users:domain"))
+    implementation(project(":feature-all-users:data"))
+    // User details
+    implementation(project(":feature-user-details:presentation"))
+    implementation(project(":feature-user-details:domain"))
+    implementation(project(":feature-user-details:data"))
+
     implementation(libs.core.ktx)
 
     implementation(libs.lifecycle.runtime.ktx)
@@ -84,4 +97,13 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.test.ext.junit)
+
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.core)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 }
