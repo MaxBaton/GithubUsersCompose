@@ -90,17 +90,18 @@ class UserViewModel(
             }
         }
     }
+}
 
-    @Suppress("UNCHECKED_CAST")
-    internal class Factory(
-        private val observeUsersUseCase: ObserveUsersUseCase,
-        private val searchUsersUceCase: SearchUsersUceCase
-    ): ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return UserViewModel(
-                observeUsersUseCase = observeUsersUseCase,
-                searchUsersUceCase = searchUsersUceCase
-            ) as T
-        }
+
+@Suppress("UNCHECKED_CAST")
+class UserViewModelFactory(
+    private val observeUsersUseCase: ObserveUsersUseCase,
+    private val searchUsersUceCase: SearchUsersUceCase
+): ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return UserViewModel(
+            observeUsersUseCase = observeUsersUseCase,
+            searchUsersUceCase = searchUsersUceCase
+        ) as T
     }
 }

@@ -8,20 +8,24 @@ import androidx.navigation.compose.composable
 import com.gefest.di.DiProvider
 import com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase
 import com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase
+import com.maxbay.githubuserscompose.presentation.di.AllUsersComponent
+import com.maxbay.githubuserscompose.presentation.di.AllUsersFeatureDepsProvider
+import com.maxbay.githubuserscompose.presentation.di.DaggerAllUsersComponent
 import com.maxbay.navigation.NavDestination
 import com.maxbay.githubuserscompose.presentation.ui.UsersScreen
 import com.maxbay.githubuserscompose.presentation.viewModel.UserContract
 import com.maxbay.githubuserscompose.presentation.viewModel.UserViewModel
+import com.maxbay.githubuserscompose.presentation.viewModel.UserViewModelFactory
 import com.maxbay.viewmodel.userEffects
 
 fun NavGraphBuilder.allUsers(onItemClick: (id: Int) -> Unit) {
     composable(route = AllUsersDestination.route) {
-        val viewModel: UserViewModel = viewModel(
-            factory = UserViewModel.Factory(
-                observeUsersUseCase = DiProvider.di.get(class_ = com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase::class),
-                searchUsersUceCase = DiProvider.di.get(class_ = com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase::class)
-            )
-        )
+        val allUsersComponent = DaggerAllUsersComponent
+            .builder()
+            .addDeps(allUsersFeatureDeps = AllUsersFeatureDepsProvider.deps)
+            .build()
+
+        val viewModel: UserViewModel = viewModel(factory = allUsersComponent.userViewModelFactory)
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         viewModel.userEffects { effect ->

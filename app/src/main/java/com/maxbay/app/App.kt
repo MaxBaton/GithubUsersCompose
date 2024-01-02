@@ -30,6 +30,7 @@ import com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDet
 import com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorageImpl
 import com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository
 import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
+import com.maxbay.githubuserscompose.presentation.di.AllUsersFeatureDepsProvider
 import retrofit2.Retrofit
 
 
@@ -165,7 +166,9 @@ class App: Application() {
         val appComponent = DaggerAppComponent
             .builder()
             .addContext(context = this)
+            .addDataStore(dataStore = this.dataStore)
             .build()
         DaggerProvider.appComponent = appComponent
+        AllUsersFeatureDepsProvider.deps = appComponent
     }
 }
