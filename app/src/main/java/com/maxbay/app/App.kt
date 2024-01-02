@@ -10,27 +10,9 @@ import com.maxbay.app.db.AppDatabase
 import com.maxbay.app.di.DaggerAppComponent
 import com.maxbay.app.di.DaggerProvider
 import com.maxbay.app.di.GlobalDiImpl
-import com.maxbay.githubuserscompose.data.network.UserApi
 import com.maxbay.app.network.AppRetrofit
-import com.maxbay.githubuserscompose.data.repository.UserRepositoryImpl
-import com.maxbay.githubuserscompose.data.storage.database.api.DatabaseStorage
-import com.maxbay.githubuserscompose.data.storage.database.dao.UserDao
-import com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseStorageImpl
-import com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorage
-import com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorageImpl
-import com.maxbay.githubuserscompose.domain.repository.UserRepository
-import com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase
-import com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase
-import com.maxbay.githubuserscompose.data.network.UserDetailsApi
-import com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl
-import com.maxbay.githubuserscompose.data.storage.database.api.DatabaseUserDetailsStorage
-import com.maxbay.githubuserscompose.data.storage.database.dao.UserDetailsDao
-import com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseUserDetailsStorageImpl
-import com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorage
-import com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorageImpl
-import com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository
-import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.githubuserscompose.presentation.di.AllUsersFeatureDepsProvider
+import com.maxbay.githubuserscompose.presentation.di.UserDetailsFeatureDepsProvider
 import retrofit2.Retrofit
 
 
@@ -170,5 +152,6 @@ class App: Application() {
             .build()
         DaggerProvider.appComponent = appComponent
         AllUsersFeatureDepsProvider.deps = appComponent
+        UserDetailsFeatureDepsProvider.deps = appComponent
     }
 }

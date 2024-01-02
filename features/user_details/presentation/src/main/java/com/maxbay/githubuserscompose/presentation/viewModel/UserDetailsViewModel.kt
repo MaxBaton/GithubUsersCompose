@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -57,16 +60,22 @@ class UserDetailsViewModel(
             UserDetailContract.Effect.UpButtonClick
         }
     }
+}
 
-    internal class Factory(
-        private val userId: Int,
-        private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
-    ): ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return UserDetailsViewModel(
-                userId = userId,
-                getUserDetailsByIdUseCase = getUserDetailsByIdUseCase
-            ) as T
-        }
+@AssistedFactory
+interface UserDetailsViewModelFactoryAssisted {
+    fun create(userId: Int): UserDetailsViewModelFactory
+}
+
+@Suppress("UNCHECKED_CAST")
+class UserDetailsViewModelFactory @AssistedInject constructor(
+    @Assisted private val userId: Int,
+    private val getUserDetailsByIdUseCase: GetUserDetailsByIdUseCase
+): ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return UserDetailsViewModel(
+            userId = userId,
+            getUserDetailsByIdUseCase = getUserDetailsByIdUseCase
+        ) as T
     }
 }

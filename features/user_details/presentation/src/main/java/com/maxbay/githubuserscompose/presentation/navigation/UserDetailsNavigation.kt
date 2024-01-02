@@ -10,9 +10,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.gefest.di.DiProvider
 import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
+import com.maxbay.githubuserscompose.presentation.di.DaggerUserDetailsComponent
+import com.maxbay.githubuserscompose.presentation.di.UserDetailsFeatureDepsProvider
 import com.maxbay.githubuserscompose.presentation.ui.UserDetailsScreen
 import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailContract
 import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailsViewModel
+import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailsViewModelFactory
 import com.maxbay.navigation.NavDestination
 import com.maxbay.viewmodel.userEffects
 
@@ -21,12 +24,13 @@ fun NavGraphBuilder.userDetails(onUpClick: () -> Unit) {
         route = UserDetailsNavDestination.routeWithArgs,
         arguments = UserDetailsNavDestination.arguments
     ) { navBackStackEntry ->
+        val userDetailsComponent = DaggerUserDetailsComponent
+            .builder()
+            .addDeps(userDetailsFeatureDeps = UserDetailsFeatureDepsProvider.deps)
+            .build()
         val userId = navBackStackEntry.arguments?.getInt(UserDetailsNavDestination.userIdArgument) ?: 0
         val viewModel: UserDetailsViewModel = viewModel(
-            factory = UserDetailsViewModel.Factory(
-                userId = userId,
-                getUserDetailsByIdUseCase = DiProvider.di.get(class_ = com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase::class)
-            )
+            factory = userDetailsComponent.userDetailsViewModelFactoryAssisted.create(userId = userId)
         )
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
