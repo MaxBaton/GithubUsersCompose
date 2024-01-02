@@ -49,6 +49,10 @@ appcompat = "1.6.1"
 material = "1.10.0"
 org-jetbrains-kotlin-jvm = "1.9.10"
 
+# DI
+dagger = "2.50"
+javax-inject = "1"
+
 [libraries]
 
 # core
@@ -103,6 +107,11 @@ navigation-testing = { group = "androidx.navigation", name = "navigation-testing
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# DI
+dagger = { group = "com.google.dagger", name = "dagger-android", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax-inject" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
