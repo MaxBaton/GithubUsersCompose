@@ -42,7 +42,6 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
-    implementation(project(":core:di"))
     implementation(project(":features:user_details:domain"))
     api(project(":core:contract:viewModel"))
     api(project(":core:navigation"))

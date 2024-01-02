@@ -17,7 +17,6 @@ rootProject.name = "GithubUsersCompose"
 include(":app")
 include(":core:ui")
 include(":core:contract:usecase")
-include(":core:di")
 include(":core:contract:viewModel")
 include(":core:navigation")
 include(":core:utils:data")

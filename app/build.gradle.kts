@@ -58,7 +58,6 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
-    implementation(project(":core:di"))
     implementation(project(":core:navigation"))
     // All users
     implementation(project(":features:all_users:presentation"))

@@ -8,14 +8,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.gefest.di.DiProvider
-import com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase
 import com.maxbay.githubuserscompose.presentation.di.DaggerUserDetailsComponent
 import com.maxbay.githubuserscompose.presentation.di.UserDetailsFeatureDepsProvider
 import com.maxbay.githubuserscompose.presentation.ui.UserDetailsScreen
 import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailContract
 import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailsViewModel
-import com.maxbay.githubuserscompose.presentation.viewModel.UserDetailsViewModelFactory
 import com.maxbay.navigation.NavDestination
 import com.maxbay.viewmodel.userEffects
 
