@@ -21,14 +21,15 @@
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/utils" />
             <option value="$PROJECT_DIR$/core/utils/data" />
-            <option value="$PROJECT_DIR$/feature-all-users" />
-            <option value="$PROJECT_DIR$/feature-all-users/data" />
-            <option value="$PROJECT_DIR$/feature-all-users/domain" />
-            <option value="$PROJECT_DIR$/feature-all-users/presentation" />
-            <option value="$PROJECT_DIR$/feature-user-details" />
-            <option value="$PROJECT_DIR$/feature-user-details/data" />
-            <option value="$PROJECT_DIR$/feature-user-details/domain" />
-            <option value="$PROJECT_DIR$/feature-user-details/presentation" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/all_users" />
+            <option value="$PROJECT_DIR$/features/all_users/data" />
+            <option value="$PROJECT_DIR$/features/all_users/domain" />
+            <option value="$PROJECT_DIR$/features/all_users/presentation" />
+            <option value="$PROJECT_DIR$/features/user_details" />
+            <option value="$PROJECT_DIR$/features/user_details/data" />
+            <option value="$PROJECT_DIR$/features/user_details/domain" />
+            <option value="$PROJECT_DIR$/features/user_details/presentation" />
           </set>
         </option>
       </GradleProjectSettings>

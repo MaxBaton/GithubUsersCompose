@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     id("kotlin-parcelize")
     alias(libs.plugins.devtools.ksp)
+    id("kotlin-kapt")
 }
 
 val githubUsersApi: String = gradleLocalProperties(rootDir).getProperty("GITHUB_USERS_API")
@@ -60,13 +61,13 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:navigation"))
     // All users
-    implementation(project(":feature-all-users:presentation"))
-    implementation(project(":feature-all-users:domain"))
-    implementation(project(":feature-all-users:data"))
+    implementation(project(":features:all_users:presentation"))
+    implementation(project(":features:all_users:domain"))
+    implementation(project(":features:all_users:data"))
     // User details
-    implementation(project(":feature-user-details:presentation"))
-    implementation(project(":feature-user-details:domain"))
-    implementation(project(":feature-user-details:data"))
+    implementation(project(":features:user_details:presentation"))
+    implementation(project(":features:user_details:domain"))
+    implementation(project(":features:user_details:data"))
 
     implementation(libs.core.ktx)
 
@@ -106,4 +107,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    // Dagger
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 }

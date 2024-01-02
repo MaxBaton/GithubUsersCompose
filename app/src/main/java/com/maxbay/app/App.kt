@@ -7,18 +7,20 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.gefest.di.DiProvider
 import com.gefest.di.GlobalDi
 import com.maxbay.app.db.AppDatabase
+import com.maxbay.app.di.DaggerAppComponent
+import com.maxbay.app.di.DaggerProvider
 import com.maxbay.app.di.GlobalDiImpl
-import com.maxbay.data.network.UserApi
+import com.maxbay.githubuserscompose.data.network.UserApi
 import com.maxbay.app.network.AppRetrofit
-import com.maxbay.data.repository.UserRepositoryImpl
-import com.maxbay.data.storage.database.api.DatabaseStorage
-import com.maxbay.data.storage.database.dao.UserDao
-import com.maxbay.data.storage.database.impl.DatabaseStorageImpl
-import com.maxbay.data.storage.prefrenses.PreferencesStorage
-import com.maxbay.data.storage.prefrenses.PreferencesStorageImpl
-import com.maxbay.domain.repository.UserRepository
-import com.maxbay.domain.usecase.ObserveUsersUseCase
-import com.maxbay.domain.usecase.SearchUsersUceCase
+import com.maxbay.githubuserscompose.data.repository.UserRepositoryImpl
+import com.maxbay.githubuserscompose.data.storage.database.api.DatabaseStorage
+import com.maxbay.githubuserscompose.data.storage.database.dao.UserDao
+import com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseStorageImpl
+import com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorage
+import com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorageImpl
+import com.maxbay.githubuserscompose.domain.repository.UserRepository
+import com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase
+import com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase
 import com.maxbay.githubuserscompose.data.network.UserDetailsApi
 import com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl
 import com.maxbay.githubuserscompose.data.storage.database.api.DatabaseUserDetailsStorage
@@ -39,6 +41,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         DiProvider.di = initDi()
+        setupDagger()
     }
 
     private fun initDi(): GlobalDi {
@@ -58,7 +61,7 @@ class App: Application() {
         )
 
         di.add(
-            key = UserDao::class,
+            key = com.maxbay.githubuserscompose.data.storage.database.dao.UserDao::class,
             object_ = di.get(class_ = AppDatabase::class).userDao()
         )
     }
@@ -70,73 +73,99 @@ class App: Application() {
         )
 
         di.add(
-            key = UserApi::class,
-            object_ = di.get(class_ = Retrofit::class).create(UserApi::class.java)
+            key = com.maxbay.githubuserscompose.data.network.UserApi::class,
+            object_ = di.get(class_ = Retrofit::class).create(com.maxbay.githubuserscompose.data.network.UserApi::class.java)
         )
 
         di.add(
-            key = PreferencesStorage::class,
-            object_ = PreferencesStorageImpl(dataStore = this.dataStore)
-        )
-
-        di.add(
-            key = DatabaseStorage::class,
-            object_ = DatabaseStorageImpl(dao = di.get(class_ = UserDao::class))
-        )
-
-        di.add(
-            key = UserRepository::class,
-            object_ = UserRepositoryImpl(
-                userApi = di.get(class_ = UserApi::class),
-                preferencesStorage = di.get(class_ = PreferencesStorage::class),
-                databaseStorage = di.get(class_ = DatabaseStorage::class)
+            key = com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorage::class,
+            object_ = com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorageImpl(
+                dataStore = this.dataStore
             )
         )
 
         di.add(
-            key = ObserveUsersUseCase::class,
-            object_ = ObserveUsersUseCase(repository = di.get(class_ = UserRepository::class))
+            key = com.maxbay.githubuserscompose.data.storage.database.api.DatabaseStorage::class,
+            object_ = com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseStorageImpl(
+                dao = di.get(class_ = com.maxbay.githubuserscompose.data.storage.database.dao.UserDao::class)
+            )
         )
 
         di.add(
-            key = SearchUsersUceCase::class,
-            object_ = SearchUsersUceCase(repository = di.get(class_ = UserRepository::class))
+            key = com.maxbay.githubuserscompose.domain.repository.UserRepository::class,
+            object_ = com.maxbay.githubuserscompose.data.repository.UserRepositoryImpl(
+                userApi = di.get(class_ = com.maxbay.githubuserscompose.data.network.UserApi::class),
+                preferencesStorage = di.get(class_ = com.maxbay.githubuserscompose.data.storage.prefrenses.PreferencesStorage::class),
+                databaseStorage = di.get(class_ = com.maxbay.githubuserscompose.data.storage.database.api.DatabaseStorage::class)
+            )
+        )
+
+        di.add(
+            key = com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase::class,
+            object_ = com.maxbay.githubuserscompose.domain.usecase.ObserveUsersUseCase(
+                repository = di.get(
+                    class_ = com.maxbay.githubuserscompose.domain.repository.UserRepository::class
+                )
+            )
+        )
+
+        di.add(
+            key = com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase::class,
+            object_ = com.maxbay.githubuserscompose.domain.usecase.SearchUsersUceCase(
+                repository = di.get(
+                    class_ = com.maxbay.githubuserscompose.domain.repository.UserRepository::class
+                )
+            )
         )
     }
 
     private fun initFeatureUserDetails(di: GlobalDi) {
         di.add(
-            key = UserDetailsApi::class,
-            object_ = di.get(class_ = Retrofit::class).create(UserDetailsApi::class.java)
+            key = com.maxbay.githubuserscompose.data.network.UserDetailsApi::class,
+            object_ = di.get(class_ = Retrofit::class).create(com.maxbay.githubuserscompose.data.network.UserDetailsApi::class.java)
         )
 
         di.add(
-            key = UserDetailsDao::class,
+            key = com.maxbay.githubuserscompose.data.storage.database.dao.UserDetailsDao::class,
             object_ = di.get(class_ = AppDatabase::class).userDetailsDao()
         )
 
         di.add(
-            key = DatabaseUserDetailsStorage::class,
-            object_ = DatabaseUserDetailsStorageImpl(dao = di.get(class_ = UserDetailsDao::class))
-        )
-
-        di.add(
-            key = PreferencesUserDetailsStorage::class,
-            object_ = PreferencesUserDetailsStorageImpl(dataStore = this.dataStore)
-        )
-
-        di.add(
-            key = UserDetailsRepository::class,
-            object_ = UserDetailsRepositoryImpl(
-                userDetailsApi = di.get(class_ = UserDetailsApi::class),
-                databaseStorage = di.get(class_ = DatabaseUserDetailsStorage::class),
-                preferencesStorage = di.get(class_ = PreferencesUserDetailsStorage::class)
+            key = com.maxbay.githubuserscompose.data.storage.database.api.DatabaseUserDetailsStorage::class,
+            object_ = com.maxbay.githubuserscompose.data.storage.database.impl.DatabaseUserDetailsStorageImpl(
+                dao = di.get(class_ = com.maxbay.githubuserscompose.data.storage.database.dao.UserDetailsDao::class)
             )
         )
 
         di.add(
-            key = GetUserDetailsByIdUseCase::class,
-            object_ = GetUserDetailsByIdUseCase(repository = di.get(class_ = UserDetailsRepository::class))
+            key = com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorage::class,
+            object_ = com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorageImpl(
+                dataStore = this.dataStore
+            )
         )
+
+        di.add(
+            key = com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository::class,
+            object_ = com.maxbay.githubuserscompose.data.repository.UserDetailsRepositoryImpl(
+                userDetailsApi = di.get(class_ = com.maxbay.githubuserscompose.data.network.UserDetailsApi::class),
+                databaseStorage = di.get(class_ = com.maxbay.githubuserscompose.data.storage.database.api.DatabaseUserDetailsStorage::class),
+                preferencesStorage = di.get(class_ = com.maxbay.githubuserscompose.data.storage.preferences.PreferencesUserDetailsStorage::class)
+            )
+        )
+
+        di.add(
+            key = com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase::class,
+            object_ = com.maxbay.githubuserscompose.domain.usecase.GetUserDetailsByIdUseCase(
+                repository = di.get(class_ = com.maxbay.githubuserscompose.domain.repository.UserDetailsRepository::class)
+            )
+        )
+    }
+
+    private fun setupDagger() {
+        val appComponent = DaggerAppComponent
+            .builder()
+            .addContext(context = this)
+            .build()
+        DaggerProvider.appComponent = appComponent
     }
 }
